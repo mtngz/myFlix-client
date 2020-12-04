@@ -72,7 +72,7 @@ export class MainView extends React.Component {
 
     return (
     <div className="main-view">
-      <Container>
+      <Container fluid="md">
       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
               <Navbar.Brand href="#home">MARVELIX</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />

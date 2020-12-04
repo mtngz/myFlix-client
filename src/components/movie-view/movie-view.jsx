@@ -1,5 +1,9 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import Media from "react-bootstrap/Media";
 
 export class MovieView extends React.Component {
 
@@ -15,29 +19,22 @@ export class MovieView extends React.Component {
     if (!movie) return null;
 
     return (
-      <div className="movie-view">
-        <img className="movie-poster" src={movie.ImagePath} />
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
-
-        <div className="movie-phase">
+      <Media>
+        <img width={256} height={414} className="movie-poster" src={movie.ImagePath} alt="Movie Poster" />
+        <Media.Body>
+          <h3>{movie.Title}</h3>
+          <p className="movie-description">{movie.Description}</p>
+          <p className="movie-phase">
           <span className="label">Phase: </span>
           <span className="value">{movie.Phase.Name}</span>
-        </div>
-        <div className="movie-director">
+          </p>
+          <p className="movie-director">
           <span className="label">Director: </span>
           <span className="value">{movie.Director.Name}</span>
-        </div>
-        <div className="back-button">
-          <button onClick={() => window.open("mainView", "_self")} className="button">Back</button>
-        </div>
-      </div>
+          </p>
+          <Button onClick={() => window.open("mainView", "_self")} variant="warning">Back</Button>
+        </Media.Body>
+      </Media>
 
 
     );
