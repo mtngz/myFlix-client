@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from "prop-types";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export function RegistrationView (props) {
   const [username, setUsername] = useState("");
@@ -15,25 +18,28 @@ export function RegistrationView (props) {
   };
 
   return (
-    <form>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <label>
-        Email:
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-      </label>
-      <label>
-        Birthday:
-        <input type="birthday" value={birthday} onChange={e => setBirthday(e.target.value)} />
-      </label>
-      <button type="button" onClick={handleSubmit}>Submit</button>
-    </form>
+    <Container>
+    <h1>Sign Up to MARVELIX</h1>
+    <Form>
+      <Form.Group controlId="formBasicUsername">
+        <Form.Label>Username: </Form.Label>
+        <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter Username" />
+      </Form.Group>
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Password: </Form.Label>
+        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter Password" /> 
+      </Form.Group>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Email: </Form.Label>
+        <Form.Control type="password" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter Email" /> 
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Enter Date of Birth: </Form.Label>
+        <Form.Control type="text" value={birthday} onChange={(e)=> setBirthday(e.target.value)} placeholder="MM-DD-YYYY" />
+      </Form.Group>
+    </Form>
+    <Button type="submit" variant="info" onClick={handleSubmit}>Sign Up</Button>
+  </Container>
   );
 };
 

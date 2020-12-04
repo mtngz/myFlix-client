@@ -47672,6 +47672,12 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -47717,34 +47723,45 @@ function RegistrationView(props) {
     props.loggedIn(username);
   };
 
-  return _react.default.createElement("form", null, _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
+  return _react.default.createElement(_Container.default, null, _react.default.createElement("h1", null, "Sign Up to MARVELIX"), _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicUsername"
+  }, _react.default.createElement(_Form.default.Label, null, "Username: "), _react.default.createElement(_Form.default.Control, {
     type: "text",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
-    }
-  })), _react.default.createElement("label", null, "Password:", _react.default.createElement("input", {
+    },
+    placeholder: "Enter Username"
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicPassword"
+  }, _react.default.createElement(_Form.default.Label, null, "Password: "), _react.default.createElement(_Form.default.Control, {
     type: "password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
-    }
-  })), _react.default.createElement("label", null, "Email:", _react.default.createElement("input", {
-    type: "email",
+    },
+    placeholder: "Enter Password"
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicEmail"
+  }, _react.default.createElement(_Form.default.Label, null, "Email: "), _react.default.createElement(_Form.default.Control, {
+    type: "password",
     value: email,
     onChange: function onChange(e) {
       return setEmail(e.target.value);
-    }
-  })), _react.default.createElement("label", null, "Birthday:", _react.default.createElement("input", {
-    type: "birthday",
+    },
+    placeholder: "Enter Email"
+  })), _react.default.createElement(_Form.default.Group, null, _react.default.createElement(_Form.default.Label, null, "Enter Date of Birth: "), _react.default.createElement(_Form.default.Control, {
+    type: "text",
     value: birthday,
     onChange: function onChange(e) {
       return setBirthday(e.target.value);
-    }
-  })), _react.default.createElement("button", {
-    type: "button",
+    },
+    placeholder: "MM-DD-YYYY"
+  }))), _react.default.createElement(_Button.default, {
+    type: "submit",
+    variant: "info",
     onClick: handleSubmit
-  }, "Submit"));
+  }, "Sign Up"));
 }
 
 ;
@@ -47756,7 +47773,7 @@ RegistrationView.propTypes = {
     Birthday: _propTypes.default.instanceOf(Date).isRequired
   })
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js"}],"components/login-view/login-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47767,6 +47784,12 @@ exports.LoginView = LoginView;
 var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
+
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -47804,22 +47827,29 @@ function LoginView(props) {
     props.onLoggedIn(username);
   };
 
-  return _react.default.createElement("form", null, _react.default.createElement("label", null, "Username:", _react.default.createElement("input", {
+  return _react.default.createElement(_Container.default, null, _react.default.createElement("h1", null, "Please log in to MARVELIX"), _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicUsername"
+  }, _react.default.createElement(_Form.default.Label, null, "Username: "), _react.default.createElement(_Form.default.Control, {
     type: "text",
     value: username,
     onChange: function onChange(e) {
       return setUsername(e.target.value);
-    }
-  })), _react.default.createElement("label", null, "Password:", _react.default.createElement("input", {
+    },
+    placeholder: "Enter Username"
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicPassword"
+  }, _react.default.createElement(_Form.default.Label, null, "Password: "), _react.default.createElement(_Form.default.Control, {
     type: "password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
-    }
-  })), _react.default.createElement("button", {
-    type: "button",
+    },
+    placeholder: "Enter Password"
+  }))), _react.default.createElement(_Button.default, {
+    type: "submit",
+    variant: "success",
     onClick: handleSubmit
-  }, "Submit"));
+  }, "Log In"));
 }
 
 LoginView.propTypes = {
@@ -47829,7 +47859,7 @@ LoginView.propTypes = {
   }),
   onLoggedIn: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48156,6 +48186,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           user = _this$state.user;
       /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
       //if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+      //if (!user) return <RegistrationView/>;
       // Before the movies have been loaded
 
       if (!movies) return _react.default.createElement("div", {
@@ -48379,7 +48410,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60823" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62521" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
