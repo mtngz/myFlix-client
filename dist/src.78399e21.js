@@ -47995,9 +47995,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           movie = _this$props.movie,
           _onClick = _this$props.onClick;
-      return _react.default.createElement(_Container.default, {
-        className: "movie-card-container"
-      }, _react.default.createElement(_Card.default, {
+      return _react.default.createElement(_Card.default, {
         style: {
           width: '16rem'
         },
@@ -48014,7 +48012,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
           return _onClick(movie);
         },
         variant: "link"
-      }, "Open"))));
+      }, "Open")));
     }
   }]);
 
@@ -48047,6 +48045,8 @@ var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _Media = _interopRequireDefault(require("react-bootstrap/Media"));
+
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48092,13 +48092,16 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var movie = this.props.movie;
       if (!movie) return null;
-      return _react.default.createElement(_Media.default, null, _react.default.createElement("img", {
+      return _react.default.createElement(_Row.default, {
+        sm: 1,
+        md: 2
+      }, _react.default.createElement(_Col.default, null, _react.default.createElement("img", {
         width: 256,
         height: 414,
         className: "movie-poster",
         src: movie.ImagePath,
         alt: "Movie Poster"
-      }), _react.default.createElement(_Media.default.Body, null, _react.default.createElement("h3", null, movie.Title), _react.default.createElement("p", {
+      })), _react.default.createElement(_Col.default, null, _react.default.createElement("h3", null, movie.Title), _react.default.createElement("p", {
         className: "movie-description"
       }, movie.Description), _react.default.createElement("p", {
         className: "movie-phase"
@@ -48117,7 +48120,26 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
           return window.open("mainView", "_self");
         },
         variant: "warning"
-      }, "Back")));
+      }, "Back")))
+      /*
+      <Media>
+        <img width={256} height={414} className="movie-poster" src={movie.ImagePath} alt="Movie Poster" />
+        <Media.Body>
+          <h3>{movie.Title}</h3>
+          <p className="movie-description">{movie.Description}</p>
+          <p className="movie-phase">
+          <span className="label">Phase: </span>
+          <span className="value">{movie.Phase.Name}</span>
+          </p>
+          <p className="movie-director">
+          <span className="label">Director: </span>
+          <span className="value">{movie.Director.Name}</span>
+          </p>
+          <Button onClick={() => window.open("mainView", "_self")} variant="warning">Back</Button>
+        </Media.Body>
+      </Media>
+      */
+      ;
     }
   }]);
 
@@ -48138,7 +48160,7 @@ MovieView.propTypes = {
     ImagePath: _propTypes.default.string.isRequired
   })
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Media":"../node_modules/react-bootstrap/esm/Media.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Media":"../node_modules/react-bootstrap/esm/Media.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48290,7 +48312,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         href: ""
       }, "Profile"), _react.default.createElement(_reactBootstrap.Nav.Link, {
         href: ""
-      }, "Log Out")))), _react.default.createElement(_Row.default, null, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
+      }, "Log Out")))), _react.default.createElement(_Row.default, {
+        className: "ml-0 mr-0"
+      }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
         movie: selectedMovie
       }) : movies.map(function (movie) {
         return _react.default.createElement(_movieCard.MovieCard, {
@@ -48422,7 +48446,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62732" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64947" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

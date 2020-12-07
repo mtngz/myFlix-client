@@ -83,7 +83,7 @@ export class MainView extends React.Component {
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
-        <Row>
+        <Row className="ml-0 mr-0">
           {selectedMovie
           ? <MovieView movie={selectedMovie}/>
           : movies.map(movie => (
