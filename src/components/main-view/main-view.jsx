@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
+import { BrowserRouter as Router, Route} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Navbar from "react-bootstrap/Navbar";
@@ -21,7 +22,6 @@ export class MainView extends React.Component {
     // Initialize the state is set to null
     this.state = {
       movies: null,
-      selectedMovie: null,
       user: null,
     };
   }
@@ -35,14 +35,6 @@ export class MainView extends React.Component {
       });
       this.getMovies(accessToken);
     }
-  }
-
-  /*When a movie is clicked, this function is invoked and updates the state of the `selectedMovie` *property to that movie*/
-  // selecting a movie
-  onMovieClick(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
   }
 
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
@@ -84,17 +76,41 @@ export class MainView extends React.Component {
   render() {
     // If the state isn't initialized, this will throw on runtime
     // before the data is initially loaded
-    const { movies, selectedMovie, user } = this.state;
+    const { movies, user } = this.state;
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
 
     if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-    //if (!user) return <RegistrationView/>;
+    if (!user) return <div className="main-view"/>;
 
     // Before the movies have been loaded
     if (!movies) return <div className="main-view">LOADING</div>;
 
     return (
+      <Router>
+        <Container fluid="md" className="main-view">
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+              <Navbar.Brand href="#home">MARVELIX</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto">
+                  <Nav.Link href="">Profile</Nav.Link>
+                  <Button onClick={this.onLogOut} variant="danger" type="submit" className="button logout">Log Out</Button>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
+          <Row className="ml-0 mr-0 justify-content-around"><Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/></Row>
+          
+          <Route exact path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
+          <Route exact path="/directors/:name" render={({ match }) => {
+            if (!movies) return <div className="main-view"/>;
+            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>}
+          } />
+        </Container>
+      </Router>
+
+
+    /*
     <div className="main-view">
       <Container fluid="md">
       <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
@@ -117,6 +133,9 @@ export class MainView extends React.Component {
         </Row>
       </Container>
     </div>
+    */
+
+
     );
   }
 }

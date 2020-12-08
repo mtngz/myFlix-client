@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import Media from "react-bootstrap/Media";
 import Col from 'react-bootstrap/Col'
+import { Link } from "react-router-dom";
 
 export class MovieView extends React.Component {
 
@@ -25,38 +25,16 @@ export class MovieView extends React.Component {
         <Col><h3>{movie.Title}</h3>
           <p className="movie-description">{movie.Description}</p>
           <p className="movie-phase">
-          <span className="label">Phase: </span>
-          <span className="value">{movie.Phase.Name}</span>
+            <span className="label">Phase: </span>
+            <span className="value"><Link to={`/phases/${movie.Phase.Name}`}>{movie.Phase.Name}</Link></span>
           </p>
           <p className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}</span>
+            <span className="label">Director: </span>
+            <span className="value"><Link to={`/directors/${movie.Director.Name}`}>{movie.Director.Name}</Link></span>
           </p>
-          <Button onClick={() => window.open("mainView", "_self")} variant="warning">Back</Button>
+          <Button onClick={() => window.open("/", "_self")} variant="warning">Back</Button>
           </Col>
       </Row>
-
-
-      /*
-      <Media>
-        <img width={256} height={414} className="movie-poster" src={movie.ImagePath} alt="Movie Poster" />
-        <Media.Body>
-          <h3>{movie.Title}</h3>
-          <p className="movie-description">{movie.Description}</p>
-          <p className="movie-phase">
-          <span className="label">Phase: </span>
-          <span className="value">{movie.Phase.Name}</span>
-          </p>
-          <p className="movie-director">
-          <span className="label">Director: </span>
-          <span className="value">{movie.Director.Name}</span>
-          </p>
-          <Button onClick={() => window.open("mainView", "_self")} variant="warning">Back</Button>
-        </Media.Body>
-      </Media>
-*/
-
-
     );
   }
 }
