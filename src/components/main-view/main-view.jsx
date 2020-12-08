@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Navbar from "react-bootstrap/Navbar";
 import { Nav } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 import {RegistrationView} from "../registration-view/registration-view";
 import {LoginView} from "../login-view/login-view";
@@ -57,6 +58,12 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  onLogOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.open('/', '_self');
+  }
+
   getMovies(token) {
     axios.get("https://marvelix.herokuapp.com/movies", {
       headers: { Authorization: `Bearer ${token}`}
@@ -96,7 +103,7 @@ export class MainView extends React.Component {
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                   <Nav.Link href="">Profile</Nav.Link>
-                  <Nav.Link href="">Log Out</Nav.Link>
+                  <Button onClick={this.onLogOut} variant="danger" type="submit" className="button logout">Log Out</Button>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>

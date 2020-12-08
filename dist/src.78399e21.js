@@ -48192,6 +48192,8 @@ var _Navbar = _interopRequireDefault(require("react-bootstrap/Navbar"));
 
 var _reactBootstrap = require("react-bootstrap");
 
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
 var _registrationView = require("../registration-view/registration-view");
 
 var _loginView = require("../login-view/login-view");
@@ -48283,6 +48285,13 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       this.getMovies(authData.token);
     }
   }, {
+    key: "onLogOut",
+    value: function onLogOut() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.open('/', '_self');
+    }
+  }, {
     key: "getMovies",
     value: function getMovies(token) {
       var _this2 = this;
@@ -48344,8 +48353,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         className: "mr-auto"
       }, _react.default.createElement(_reactBootstrap.Nav.Link, {
         href: ""
-      }, "Profile"), _react.default.createElement(_reactBootstrap.Nav.Link, {
-        href: ""
+      }, "Profile"), _react.default.createElement(_Button.default, {
+        onClick: this.onLogOut,
+        variant: "danger",
+        type: "submit",
+        className: "button logout"
       }, "Log Out")))), _react.default.createElement(_Row.default, {
         className: "ml-0 mr-0"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
@@ -48386,7 +48398,7 @@ MainView.propTypes = {
   })),
   user: _propTypes.default.string.isRequired
 };
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx"}],"index.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
