@@ -21,7 +21,7 @@ export class MainView extends React.Component {
 
     // Initialize the state is set to null
     this.state = {
-      movies: null,
+      movies: [],
       user: null,
     };
   }
@@ -99,8 +99,14 @@ export class MainView extends React.Component {
                 </Nav>
               </Navbar.Collapse>
             </Navbar>
-          <Row className="ml-0 mr-0 justify-content-around"><Route exact path="/" render={() => movies.map(m => <MovieCard key={m._id} movie={m}/>)}/></Row>
-          
+          <Row className="ml-0 mr-0 justify-content-around">
+            <Route exact path="/" render={() => {
+              if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+              return movies.map(m => <MovieCard key={m._id} movie={m}/>)
+              }
+            }/>
+          </Row>
+          <Route path="/register" render={() => <RegistrationView />} />
           <Route exact path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
           <Route exact path="/directors/:name" render={({ match }) => {
             if (!movies) return <div className="main-view"/>;
