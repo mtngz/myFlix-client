@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Link, Route} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Navbar from "react-bootstrap/Navbar";
@@ -14,6 +14,7 @@ import {MovieCard} from "../movie-card/movie-card";
 import {MovieView} from "../movie-view/movie-view";
 import {DirectorView} from "../director-view/director-view";
 import {PhaseView} from "../phase-view/phase-view";
+import {ProfileView} from "../profile-view/profile-view";
 
 export class MainView extends React.Component {
   constructor() {
@@ -92,11 +93,11 @@ export class MainView extends React.Component {
       <Router>
         <Container fluid="md" className="main-view">
         <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-              <Navbar.Brand href="#home">MARVELIX</Navbar.Brand>
+              <Navbar.Brand as={Link} to="/">MARVELIX</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                  <Nav.Link href="">Profile</Nav.Link>
+                  <Nav.Link as={Link} to="/users/${user}">Profile</Nav.Link>
                   <Button onClick={this.onLogOut} variant="danger" type="submit" className="button logout">Log Out</Button>
                 </Nav>
               </Navbar.Collapse>
@@ -118,6 +119,11 @@ export class MainView extends React.Component {
             if (!movies) return <div className="main-view" />;
             return <PhaseView phase={movies.find(m => m.Phase.Name === match.params.name).Phase}/>
           }} />
+          <Route exact path="/users/:username" render={() => {
+							if (!user) return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+							if (movies.length === 0) return;
+							return <ProfileView movies={movies} />;
+					}} />
         </Container>
       </Router>
 
