@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Col from 'react-bootstrap/Col'
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export class MovieView extends React.Component {
 
@@ -13,6 +14,23 @@ export class MovieView extends React.Component {
 
     this.state = {};
   }
+
+  addToFavorites = (e) => {
+    e.preventDefault()
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+
+    axios.post(`https://marvelix.herokuapp.com/users/${username}/Favorites/${this.props.movie._id}`,{},{
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+      alert(`${this.props.movie.Title} added to favorites`)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
 
   render() {
     const { movie } = this.props;
@@ -33,6 +51,7 @@ export class MovieView extends React.Component {
             <span className="value"><Link to={`/directors/${movie.Director.Name}`}>{movie.Director.Name}</Link></span>
           </p>
           <Button onClick={() => window.open("/", "_self")} variant="warning">Back</Button>
+          <Button onClick={this.addToFavorites}>Add to favorites</Button>
           </Col>
       </Row>
     );
