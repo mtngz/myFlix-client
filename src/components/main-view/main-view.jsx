@@ -12,6 +12,8 @@ import {RegistrationView} from "../registration-view/registration-view";
 import {LoginView} from "../login-view/login-view";
 import {MovieCard} from "../movie-card/movie-card";
 import {MovieView} from "../movie-view/movie-view";
+import {DirectorView} from "../director-view/director-view";
+import {PhaseView} from "../phase-view/phase-view";
 
 export class MainView extends React.Component {
   constructor() {
@@ -110,8 +112,12 @@ export class MainView extends React.Component {
           <Route exact path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
           <Route exact path="/directors/:name" render={({ match }) => {
             if (!movies) return <div className="main-view"/>;
-            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>}
-          } />
+            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>
+          }} />
+          <Route exact path="/phases/:name" render={({ match }) => {
+            if (!movies) return <div className="main-view" />;
+            return <PhaseView phase={movies.find(m => m.Phase.Name === match.params.name).Phase}/>
+          }} />
         </Container>
       </Router>
 
