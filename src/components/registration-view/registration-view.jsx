@@ -43,7 +43,7 @@ export function RegistrationView (props) {
       </Form.Group>
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email: </Form.Label>
-        <Form.Control type="password" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter Email" /> 
+        <Form.Control type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter Email" /> 
       </Form.Group>
       <Form.Group>
         <Form.Label>Enter Date of Birth: </Form.Label>

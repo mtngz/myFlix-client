@@ -50807,7 +50807,7 @@ function RegistrationView(props) {
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicEmail"
   }, _react.default.createElement(_Form.default.Label, null, "Email: "), _react.default.createElement(_Form.default.Control, {
-    type: "password",
+    type: "text",
     value: email,
     onChange: function onChange(e) {
       return setEmail(e.target.value);
@@ -50855,6 +50855,8 @@ var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _reactRouterDom = require("react-router-dom");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -50922,7 +50924,12 @@ function LoginView(props) {
     type: "submit",
     variant: "success",
     onClick: handleSubmit
-  }, "Log In"));
+  }, "Log In"), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/register"
+  }, _react.default.createElement(_Button.default, {
+    variant: "link",
+    className: "button-register"
+  }, "Create new Account")));
 }
 
 LoginView.propTypes = {
@@ -50932,7 +50939,7 @@ LoginView.propTypes = {
   }),
   onLoggedIn: _propTypes.default.func.isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","axios":"../node_modules/axios/index.js"}],"../../../../../../../../../../../usr/local/share/.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"../../../../../../../../../../../usr/local/share/.config/yarn/global/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -51556,15 +51563,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           user = _this$state.user;
       /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
-
-      if (!user) return _react.default.createElement(_loginView.LoginView, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
-        }
-      });
-      if (!user) return _react.default.createElement("div", {
-        className: "main-view"
-      }); // Before the movies have been loaded
+      //if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+      //if (!user) return <div className="main-view"/>;
+      // Before the movies have been loaded
 
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
@@ -51801,7 +51802,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61734" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50859" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
