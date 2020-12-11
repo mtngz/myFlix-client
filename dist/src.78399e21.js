@@ -51082,16 +51082,17 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
         bg: "danger",
         text: "white",
         border: "primary",
-        className: "mt-5"
+        className: "mb-5"
       }, _react.default.createElement(_Card.default.Img, {
         variant: "top",
         width: 256,
         height: 414,
         src: movie.ImagePath
-      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, null, movie.Description), _react.default.createElement(_reactRouterDom.Link, {
+      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Card.default.Text, null, movie.Description)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement(_reactRouterDom.Link, {
         to: "/movies/".concat(movie._id)
       }, _react.default.createElement(_Button.default, {
-        variant: "light"
+        variant: "light",
+        block: true
       }, "Open"))));
     }
   }]);
@@ -51221,9 +51222,11 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return window.open("/", "_self");
         },
-        variant: "warning"
+        variant: "secondary",
+        className: "mr-3"
       }, "Back"), _react.default.createElement(_Button.default, {
-        onClick: this.addToFavorites
+        onClick: this.addToFavorites,
+        variant: "success"
       }, "Add to favorites")));
     }
   }]);
@@ -51313,27 +51316,22 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var director = this.props.director;
       if (!director) return null;
-      return _react.default.createElement("div", {
+      return _react.default.createElement(_Container.default, {
         className: "director-view"
-      }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Card.default, {
-        className: "director-details-card"
-      }, _react.default.createElement(_Card.default.Title, {
-        className: "director-name"
-      }, director.Name), _react.default.createElement(_Card.default.Text, {
-        className: "director-bio director-details"
-      }, director.Bio), _react.default.createElement(_ListGroup.default, {
-        variant: "flush",
-        className: "card-content"
-      }, _react.default.createElement(_ListGroup.default.Item, {
-        className: "director-yob director-details"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Birth Year"), _react.default.createElement("br", null), director.Birth, _react.default.createElement("br", null))), _react.default.createElement(_reactRouterDom.Link, {
+      }, _react.default.createElement(_Card.default, {
+        style: {
+          width: "30rem"
+        },
+        className: "phase-card",
+        bg: "primary",
+        text: "white",
+        border: "primary"
+      }, _react.default.createElement(_Card.default.Header, null, director.Name), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Text, null, _react.default.createElement("p", null, director.Bio), _react.default.createElement("p", null, "Born: ", director.Birth)), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "secondary",
         className: "button-back"
-      }, "All Movies"))))));
+      }, "All Movies")))));
     }
   }]);
 
@@ -51417,8 +51415,11 @@ var PhaseView = /*#__PURE__*/function (_React$Component) {
         style: {
           width: "30rem"
         },
-        className: "phase-card"
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, phase.Name), _react.default.createElement(_Card.default.Text, null, phase.Description), _react.default.createElement(_reactRouterDom.Link, {
+        className: "phase-card",
+        bg: "primary",
+        text: "white",
+        border: "primary"
+      }, _react.default.createElement(_Card.default.Header, null, "Phase ", phase.Name), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Text, null, phase.Description), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "secondary",
@@ -51469,6 +51470,8 @@ var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
 var _CardDeck = _interopRequireDefault(require("react-bootstrap/CardDeck"));
 
 var _reactBootstrap = require("react-bootstrap");
+
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51681,26 +51684,26 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         className: "tab-item",
         eventKey: "profile",
         title: "Profile"
-      }, _react.default.createElement(_Card.default, {
+      }, _react.default.createElement(_Container.default, {
         className: "profile-card"
-      }, _react.default.createElement("h1", {
-        className: "profile-title"
-      }, username, "'s Favorite Movies"), _react.default.createElement(_Card.default.Body, null, Favorites.length === 0 && _react.default.createElement("div", {
+      }, _react.default.createElement("h3", {
+        className: "profile-title m-2",
+        style: {
+          color: "blue"
+        }
+      }, username, "'s Favorite Movies"), _react.default.createElement(_Row.default, {
+        className: "ml-0 mr-0 justify-content-around"
+      }, Favorites.length === 0 && _react.default.createElement("div", {
         className: "card-content"
-      }, "You have no favorite movies."), _react.default.createElement("div", {
-        className: "favorites-container"
-      }, Favorites.length > 0 && movies.map(function (movie) {
+      }, "You have no favorite movies."), Favorites.length > 0 && movies.map(function (movie) {
         if (movie._id === Favorites.find(function (favMovie) {
           return favMovie === movie._id;
         })) {
-          return _react.default.createElement(_CardDeck.default, {
-            className: "movie-card-deck"
-          }, _react.default.createElement(_Card.default, {
-            className: "favorites-item card-content",
+          return _react.default.createElement(_Card.default, {
             style: {
-              width: '16rem',
-              flex: 1
+              width: '16rem'
             },
+            className: "mb-5",
             key: movie._id
           }, _react.default.createElement(_Card.default.Img, {
             variant: "top",
@@ -51708,27 +51711,31 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
             height: 414,
             src: movie.ImagePath
           }), _react.default.createElement(_Card.default.Body, {
-            className: "movie-card-body"
+            className: "movie-card-body text-center"
           }, _react.default.createElement(_Card.default.Title, {
             className: "movie-card-title"
-          }, movie.Title), _react.default.createElement(_Button.default, {
+          }, movie.Title)), _react.default.createElement(_Card.default.Footer, null, _react.default.createElement(_Button.default, {
             size: "sm",
             block: true,
             className: "profile-button remove-favorite",
+            variant: "outline-danger",
             onClick: function onClick(e) {
               return _this5.handleRemoveFavorite(e, movie._id);
             }
-          }, "Remove"))));
+          }, "Remove from Favorites")));
         }
-      }))))), _react.default.createElement(_reactBootstrap.Tab, {
+      })))), _react.default.createElement(_reactBootstrap.Tab, {
         className: "tab-item",
         eventKey: "update",
         title: "Update"
       }, _react.default.createElement(_Card.default, {
         className: "update-card"
-      }, _react.default.createElement("h1", {
-        className: "profile-title"
-      }, "Update Profile"), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Form.default, {
+      }, _react.default.createElement("h3", {
+        className: "profile-title m-2",
+        style: {
+          color: "blue"
+        }
+      }, "Update ", username, "'s Profile"), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Form.default, {
         noValidate: true,
         validated: validated,
         className: "update-form",
@@ -51790,18 +51797,21 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         type: "invalid"
       }, "Please enter a valid birthday.")), _react.default.createElement(_Button.default, {
         className: "update profile-button",
-        type: "submit",
-        block: true
+        type: "submit"
       }, "Update"))))), _react.default.createElement(_reactBootstrap.Tab, {
         className: "tab-item",
         eventKey: "delete",
         title: "Delete Profile"
       }, _react.default.createElement(_Card.default, {
         className: "update-card"
-      }, _react.default.createElement("h1", {
-        className: "profile-title"
-      }, "Delete Your Profile"), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Button.default, {
+      }, _react.default.createElement("h3", {
+        className: "profile-title m-2",
+        style: {
+          color: "blue"
+        }
+      }, "Delete ", username, "'s Profile"), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Button.default, {
         className: "profile-button delete-button",
+        variant: "danger",
         block: true,
         onClick: function onClick(e) {
           return _this5.handleDeregister(e);
@@ -51825,7 +51835,7 @@ ProfileView.propTypes = {
     Birthday: _propTypes.default.string
   })
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/CardDeck":"../node_modules/react-bootstrap/esm/CardDeck.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-bootstrap/CardDeck":"../node_modules/react-bootstrap/esm/CardDeck.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51988,7 +51998,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         collapseOnSelect: true,
         expand: "lg",
         bg: "primary",
-        variant: "dark"
+        variant: "dark",
+        className: "mb-5"
       }, _react.default.createElement(_Navbar.default.Brand, {
         as: _reactRouterDom.Link,
         to: "/"
@@ -52003,7 +52014,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         to: "/users/${user}"
       }, "Profile"), _react.default.createElement(_Button.default, {
         onClick: this.onLogOut,
-        variant: "danger",
+        variant: "warning",
         type: "submit",
         className: "button logout"
       }, "Log Out")))), _react.default.createElement(_Row.default, {
@@ -52229,7 +52240,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50859" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54616" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

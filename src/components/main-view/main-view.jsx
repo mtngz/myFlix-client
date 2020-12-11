@@ -92,13 +92,13 @@ export class MainView extends React.Component {
     return (
       <Router>
         <Container fluid="md" className="main-view">
-        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" className="mb-5">
               <Navbar.Brand as={Link} to="/">MARVELIX</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
                   <Nav.Link as={Link} to="/users/${user}">Profile</Nav.Link>
-                  <Button onClick={this.onLogOut} variant="danger" type="submit" className="button logout">Log Out</Button>
+                  <Button onClick={this.onLogOut} variant="warning" type="submit" className="button logout">Log Out</Button>
                 </Nav>
               </Navbar.Collapse>
             </Navbar>

@@ -16,15 +16,17 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-    <Card style={{ width: '16rem' }} bg="danger" text="white" border="primary" className="mt-5">
+    <Card style={{ width: '16rem' }} bg="danger" text="white" border="primary" className="mb-5">
       <Card.Img variant="top" width={256} height={414} src={movie.ImagePath} />
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
         <Card.Text>{movie.Description}</Card.Text>
-        <Link to={`/movies/${movie._id}`}>
-          <Button variant="light">Open</Button>
-        </Link>
       </Card.Body>
+      <Card.Footer>
+      <Link to={`/movies/${movie._id}`}>
+          <Button variant="light" block>Open</Button>
+        </Link>
+      </Card.Footer>
     </Card>
     );
   }

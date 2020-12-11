@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import CardDeck from 'react-bootstrap/CardDeck';
 import { Tabs, Tab } from 'react-bootstrap';
+import Row from "react-bootstrap/Row";
 
 export class ProfileView extends React.Component {
 	constructor() {
@@ -162,37 +163,39 @@ export class ProfileView extends React.Component {
 			<Container className="profile-view">
 				<Tabs defaultActiveKey="profile" transition={false} className="profile-tabs">
 					<Tab className="tab-item" eventKey="profile" title="Profile">
-						<Card className="profile-card">
-							<h1 className="profile-title">{username}'s Favorite Movies</h1>
-							<Card.Body>
+					<Container className="profile-card">
+							<h3 className="profile-title m-2" style={{ color: "blue"}}>{username}'s Favorite Movies</h3>
+							<Row className="ml-0 mr-0 justify-content-around">
 								{Favorites.length === 0 && <div className="card-content">You have no favorite movies.</div>}
 
-								<div className="favorites-container">
+								
 									{Favorites.length > 0 &&
 										movies.map((movie) => {
 											if (movie._id === Favorites.find((favMovie) => favMovie === movie._id)) {
 												return (
-													<CardDeck className="movie-card-deck">
-														<Card className="favorites-item card-content" style={{ width: '16rem', flex: 1 }} key={movie._id}>
+													
+														<Card style={{ width: '16rem' }} className="mb-5" key={movie._id}>
 															<Card.Img variant="top" width={256} height={414} src={movie.ImagePath} />
-															<Card.Body className="movie-card-body">
+															<Card.Body className="movie-card-body text-center">
 																<Card.Title className="movie-card-title">{movie.Title}</Card.Title>
-																<Button size="sm" block className="profile-button remove-favorite" onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
-																	Remove
-																</Button>
 															</Card.Body>
+															<Card.Footer>
+																<Button size="sm" block className="profile-button remove-favorite" variant="outline-danger" onClick={(e) => this.handleRemoveFavorite(e, movie._id)}>
+																	Remove from Favorites
+																</Button>
+															</Card.Footer>
 														</Card>
-													</CardDeck>
+													
 												);
 											}
 										})}
-								</div>
-							</Card.Body>
-						</Card>
+								
+							</Row>
+						</Container>
 					</Tab>
 					<Tab className="tab-item" eventKey="update" title="Update">
 						<Card className="update-card">
-							<h1 className="profile-title">Update Profile</h1>
+							<h3 className="profile-title m-2" style={{ color: "blue"}}>Update {username}'s Profile</h3>
 							<Card.Body>
 								<Form noValidate validated={validated} className="update-form" onSubmit={(e) => this.handleUpdate(e, this.Username, this.Password, this.Email, this.Birthday)}>
 									<Form.Group controlId="formBasicUsername">
@@ -217,7 +220,7 @@ export class ProfileView extends React.Component {
 										<Form.Control type="date" placeholder="MM-DD-YYYY" onChange={(e) => this.setBirthday(e.target.value)} />
 										<Form.Control.Feedback type="invalid">Please enter a valid birthday.</Form.Control.Feedback>
 									</Form.Group>
-									<Button className="update profile-button" type="submit" block>
+									<Button className="update profile-button" type="submit">
 										Update
 									</Button>
 								</Form>
@@ -227,9 +230,9 @@ export class ProfileView extends React.Component {
 
 					<Tab className="tab-item" eventKey="delete" title="Delete Profile">
 						<Card className="update-card">
-							<h1 className="profile-title">Delete Your Profile</h1>
+							<h3 className="profile-title m-2" style={{ color: "blue"}}>Delete {username}'s Profile</h3>
 							<Card.Body>
-								<Button className="profile-button delete-button" block onClick={(e) => this.handleDeregister(e)}>
+								<Button className="profile-button delete-button" variant="danger" block onClick={(e) => this.handleDeregister(e)}>
 									Click Here If You're Sure You Want To Delete Your Profile
 								</Button>
 							</Card.Body>

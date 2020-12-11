@@ -20,9 +20,9 @@ export class PhaseView extends React.Component {
 
     return (
       <Container className="phase-view">
-        <Card style={{ width: "30rem" }} className="phase-card">
+        <Card style={{ width: "30rem" }} className="phase-card" bg="primary" text="white" border="primary">
+          <Card.Header>Phase {phase.Name}</Card.Header>
           <Card.Body>
-            <Card.Title>{phase.Name}</Card.Title>
             <Card.Text>{phase.Description}</Card.Text>
             <Link to={"/"}>
               <Button variant="secondary" className="button-back">All Movies</Button>
@@ -30,7 +30,6 @@ export class PhaseView extends React.Component {
           </Card.Body>
         </Card>
       </Container>
-
     );
   }
 }
