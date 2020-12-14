@@ -1,13 +1,16 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import { BrowserRouter as Router, Link, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route} from "react-router-dom"; // import { BrowserRouter as Router, Link, Route} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Navbar from "react-bootstrap/Navbar";
 import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import {connect} from "react-redux";
 
+import {setMovies} from "../../actions/actions";
+import MoviesList from "../movies-list/movies-list";
 import {RegistrationView} from "../registration-view/registration-view";
 import {LoginView} from "../login-view/login-view";
 import {MovieCard} from "../movie-card/movie-card";
@@ -24,7 +27,6 @@ export class MainView extends React.Component {
 
     // Initialize the state is set to null
     this.state = {
-      movies: [],
       user: null,
     };
   }
@@ -64,10 +66,8 @@ export class MainView extends React.Component {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      // Assign the result to the state
-      this.setState({
-        movies: response.data
-      });
+      // Update with React Redux Code
+      this.props.setMovies(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -79,7 +79,9 @@ export class MainView extends React.Component {
   render() {
     // If the state isn't initialized, this will throw on runtime
     // before the data is initially loaded
-    const { movies, user } = this.state;
+    // action setMovies is used here
+    let { movies } = this.props;
+    let { user } = this.state;
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
 
@@ -105,7 +107,7 @@ export class MainView extends React.Component {
           <Row className="ml-0 mr-0 justify-content-around">
             <Route exact path="/" render={() => {
               if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-              return movies.map(m => <MovieCard key={m._id} movie={m}/>)
+              return <MoviesList movies={movies}/>;
               }
             }/>
           </Row>
@@ -157,6 +159,12 @@ export class MainView extends React.Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  return {movies: state.movies}
+}
+
+export default connect(mapStateToProps, {setMovies})(MainView);
 
 MainView.propTypes = {
   movies: PropTypes.arrayOf(
