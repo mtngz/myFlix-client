@@ -8,6 +8,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {connect} from "react-redux";
+import {Link} from "react-bootstrap";
 
 import {setMovies} from "../../actions/actions";
 import MoviesList from "../movies-list/movies-list";
