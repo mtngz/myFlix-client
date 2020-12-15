@@ -53104,11 +53104,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setMovies = setMovies;
 exports.setFilter = setFilter;
-exports.SET_FILTER = exports.SET_MOVIES = void 0;
+exports.setUser = setUser;
+exports.SET_USER = exports.SET_FILTER = exports.SET_MOVIES = void 0;
 var SET_MOVIES = "SET_MOVIES";
 exports.SET_MOVIES = SET_MOVIES;
 var SET_FILTER = "SET_FILTER";
 exports.SET_FILTER = SET_FILTER;
+var SET_USER = "SET_USER";
+exports.SET_USER = SET_USER;
 
 function setMovies(value) {
   return {
@@ -53120,6 +53123,13 @@ function setMovies(value) {
 function setFilter(value) {
   return {
     type: SET_FILTER,
+    value: value
+  };
+}
+
+function setUser(value) {
+  return {
+    type: SET_USER,
     value: value
   };
 }
@@ -54421,18 +54431,11 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MainView);
 
   function MainView() {
-    var _this;
-
     _classCallCheck(this, MainView);
 
     // Call the superclass constructor
     // so React can initialize it
-    _this = _super.call(this); // Initialize the state is set to null
-
-    _this.state = {
-      user: null
-    };
-    return _this;
+    return _super.call(this); // no initial state as we use Redux
   } // One of the "hooks" available in a React Component
 
 
@@ -54440,11 +54443,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var accessToken = localStorage.getItem('token');
+      var user = localStorage.getItem("user");
 
       if (accessToken !== null) {
-        this.setState({
-          user: localStorage.getItem('user')
-        });
+        this.props.setUser(user);
         this.getMovies(accessToken);
       }
     }
@@ -54454,9 +54456,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "onLoggedIn",
     value: function onLoggedIn(authData) {
       console.log(authData);
-      this.setState({
-        user: authData.user.Username
-      });
+      this.props.setUser(authData.user.Username);
       localStorage.setItem("token", authData.token);
       localStorage.setItem("user", authData.user.Username);
       this.getMovies(authData.token);
@@ -54471,7 +54471,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getMovies",
     value: function getMovies(token) {
-      var _this2 = this;
+      var _this = this;
 
       _axios.default.get("https://marvelix.herokuapp.com/movies", {
         headers: {
@@ -54479,7 +54479,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (response) {
         // Update with React Redux Code
-        _this2.props.setMovies(response.data);
+        _this.props.setMovies(response.data);
       }).catch(function (error) {
         console.log(error);
       });
@@ -54489,13 +54489,14 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       // If the state isn't initialized, this will throw on runtime
       // before the data is initially loaded
-      // action setMovies is used here
-      var movies = this.props.movies;
-      var user = this.state.user;
+      // action setMovies and setUser is used here
+      var _this$props = this.props,
+          movies = _this$props.movies,
+          user = _this$props.user;
       /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
       //if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
       //if (!user) return <div className="main-view"/>;
@@ -54538,7 +54539,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render() {
           if (!user) return _react.default.createElement(_loginView.LoginView, {
             onLoggedIn: function onLoggedIn(user) {
-              return _this3.onLoggedIn(user);
+              return _this2.onLoggedIn(user);
             }
           });
           return _react.default.createElement(_moviesList.default, {
@@ -54595,7 +54596,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         render: function render() {
           if (!user) return _react.default.createElement(_loginView.LoginView, {
             onLoggedIn: function onLoggedIn(user) {
-              return _this3.onLoggedIn(user);
+              return _this2.onLoggedIn(user);
             }
           });
           if (movies.length === 0) return;
@@ -54639,12 +54640,14 @@ exports.MainView = MainView;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    movies: state.movies
+    movies: state.movies,
+    user: state.user
   };
 };
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
-  setMovies: _actions.setMovies
+  setMovies: _actions.setMovies,
+  setUser: _actions.setUser
 })(MainView);
 
 exports.default = _default;
@@ -54705,6 +54708,19 @@ function movies() {
       return state;
   }
 }
+
+function user() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions.SET_USER:
+      return action.value;
+
+    default:
+      return state;
+  }
+}
 /* USE COMBINE REDUCERS INSTEAD
 function moviesApp(state = {}, action) {
   return {
@@ -54716,7 +54732,8 @@ function moviesApp(state = {}, action) {
 
 var moviesApp = (0, _redux.combineReducers)({
   visibilityFilter: visibilityFilter,
-  movies: movies
+  movies: movies,
+  user: user
 });
 var _default = moviesApp;
 exports.default = _default;
@@ -54825,7 +54842,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50468" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53216" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

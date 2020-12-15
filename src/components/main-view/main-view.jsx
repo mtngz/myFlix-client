@@ -10,7 +10,7 @@ import Button from "react-bootstrap/Button";
 import {connect} from "react-redux";
 import {Link} from "react-bootstrap";
 
-import {setMovies} from "../../actions/actions";
+import {setMovies, setUser} from "../../actions/actions";
 import MoviesList from "../movies-list/movies-list";
 import {RegistrationView} from "../registration-view/registration-view";
 import {LoginView} from "../login-view/login-view";
@@ -26,19 +26,16 @@ export class MainView extends React.Component {
     // so React can initialize it
     super();
 
-    // Initialize the state is set to null
-    this.state = {
-      user: null,
-    };
+    // no initial state as we use Redux
+
   }
 
   // One of the "hooks" available in a React Component
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
+    let user = localStorage.getItem("user");
     if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
+      this.props.setUser(user);
       this.getMovies(accessToken);
     }
   }
@@ -47,10 +44,7 @@ export class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log(authData);
-    this.setState({
-      user: authData.user.Username
-    });
-
+    this.props.setUser(authData.user.Username);
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", authData.user.Username);
     this.getMovies(authData.token);
@@ -80,9 +74,8 @@ export class MainView extends React.Component {
   render() {
     // If the state isn't initialized, this will throw on runtime
     // before the data is initially loaded
-    // action setMovies is used here
-    let { movies } = this.props;
-    let { user } = this.state;
+    // action setMovies and setUser is used here
+    let { movies, user } = this.props;
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
 
@@ -162,10 +155,10 @@ export class MainView extends React.Component {
 }
 
 let mapStateToProps = state => {
-  return {movies: state.movies}
+  return {movies: state.movies, user: state.user}
 }
 
-export default connect(mapStateToProps, {setMovies})(MainView);
+export default connect(mapStateToProps, {setMovies, setUser})(MainView);
 
 MainView.propTypes = {
   movies: PropTypes.arrayOf(
