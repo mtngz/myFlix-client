@@ -53159,7 +53159,7 @@ function VisibilityFilterInput(props) {
       return props.setFilter(e.target.value);
     },
     value: props.visibilityFilter,
-    placeholder: "Filter Movies",
+    placeholder: "Search for Title",
     style: {
       width: '20rem'
     },
@@ -54525,7 +54525,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         className: "mr-auto"
       }, _react.default.createElement(_reactBootstrap.Nav.Link, {
         as: _reactBootstrap.Link,
-        to: "/users/${user}"
+        to: "/users/".concat(user)
       }, "Profile"), _react.default.createElement(_Button.default, {
         onClick: this.onLogOut,
         variant: "warning",
@@ -54842,7 +54842,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53216" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65085" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

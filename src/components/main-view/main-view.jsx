@@ -93,7 +93,7 @@ export class MainView extends React.Component {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                  <Nav.Link as={Link} to="/users/${user}">Profile</Nav.Link>
+                  <Nav.Link as={Link} to={`/users/${user}`}>Profile</Nav.Link>
                   <Button onClick={this.onLogOut} variant="warning" type="submit" className="button logout">Log Out</Button>
                 </Nav>
               </Navbar.Collapse>
