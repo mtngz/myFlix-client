@@ -54516,22 +54516,22 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         className: "mb-5"
       }, _react.default.createElement(_Navbar.default.Brand, {
         as: _reactBootstrap.Link,
-        to: "/"
+        href: "/"
       }, "MARVELIX"), _react.default.createElement(_Navbar.default.Toggle, {
         "aria-controls": "basic-navbar-nav"
       }), _react.default.createElement(_Navbar.default.Collapse, {
         id: "responsive-navbar-nav"
       }, _react.default.createElement(_reactBootstrap.Nav, {
         className: "mr-auto"
-      }, _react.default.createElement(_reactBootstrap.Nav.Link, {
+      }, _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         as: _reactBootstrap.Link,
-        to: "/users/".concat(user)
-      }, "Profile"), _react.default.createElement(_Button.default, {
+        href: "/users/".concat(user)
+      }, "Profile")), _react.default.createElement(_reactBootstrap.Nav.Item, null, _react.default.createElement(_Button.default, {
         onClick: this.onLogOut,
         variant: "warning",
         type: "submit",
         className: "button logout"
-      }, "Log Out")))), _react.default.createElement(_Row.default, {
+      }, "Log Out"))))), _react.default.createElement(_Row.default, {
         className: "ml-0 mr-0 justify-content-around"
       }, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
@@ -54842,7 +54842,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65085" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50649" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
