@@ -88,6 +88,7 @@ export class MainView extends React.Component {
     return (
       <Router>
         <Container fluid="md" className="main-view">
+          { user && 
           <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" className="mb-5">
             <Navbar.Brand as={Link} href="/">MARVELIX</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -102,6 +103,7 @@ export class MainView extends React.Component {
               </Nav>
             </Navbar.Collapse>
           </Navbar>
+          }
           <Row className="ml-0 mr-0 justify-content-around">
             <Route exact path="/" render={() => {
               if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
